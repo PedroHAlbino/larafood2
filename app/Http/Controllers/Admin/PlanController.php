@@ -39,4 +39,65 @@ class PlanController extends Controller
 
     }
 
+    public function show($url)
+    {
+        $plan = $this->repository->where('url', $url)->first();
+
+        if(!$plan)
+            return redirect()->back();
+        
+        return view('admin.pages.plan.show',[
+            'plan' => $plan
+        ]);
+    }
+
+    public function destroy($url)
+    {
+        $plan = $this->repository->where('url', $url)->first();
+
+        if(!$plan)
+            return redirect()->back();
+        
+        $plan->delete();
+        
+        return redirect()->route('plan.index');
+    }
+
+    public function search(Request $request)
+    {
+        $plans = $this->repository->search($request->filter);
+        return view('admin.pages.plan.index',[
+            'plans' => $plans
+        ]);
+
+    }
+
+    public function edit($url)
+    {
+        $plan = $this->repository->where('url', $url)->first();
+
+        if(!$plan)
+            return redirect()->back();
+                
+        return view('admin.pages.plan.edit',[
+            'plan' => $plan
+        ]);
+    }
+
+    public function update(Request $request,$url)
+    {
+        $plan = $this->repository->where('url', $url)->first();
+
+        if(!$plan)
+            return redirect()->back();
+                
+        $plan->update($request->all());
+
+        return redirect()->route('plan.index');
+    }
+
+
+    
+
+
 }
