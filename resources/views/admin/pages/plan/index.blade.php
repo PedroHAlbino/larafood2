@@ -6,17 +6,17 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-            <a href="{{ route('admin.index') }}">Dashboard</a>  
+            <a href="{{ route('admin.index') }}">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
             <a href="{{ route('plan.index') }}">Planos</a>
-            </li>       
+            </li>
         </ol>
     </nav>
 
     <h1>Planos <a href="{{ route('plan.create') }}" class="btn btn-dark">ADD</a></h1>
-    
-   
+
+
 
 @stop
 
@@ -31,7 +31,7 @@
            </form>
         </div>
         <div class="card-body">
-           
+
                 <table class="table table-condensed">
                     <thead>
                         <tr>
@@ -51,6 +51,7 @@
                                 {{ number_format($plan->price, 2)}}
                             </td>
                             <td style="width: 10px;">
+                                <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-info">Detalhes</a>
                                 <a href="{{ route('plan.edit', $plan->url) }}" class="btn btn-info">Edit</a>
                                 <a href="{{ route('plan.show', $plan->url) }}" class="btn btn-warning">Ver</a>
                             </td>
@@ -59,7 +60,7 @@
                     </tbody>
                     @endforeach
                 </table>
-            
+
         </div>
     </div>
 @stop
